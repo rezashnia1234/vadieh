@@ -29,23 +29,25 @@
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", go_back_index, false);
 			}
-			
-			window.plugins.cameraAccess.checkAccess(
-				function() {
-					// Go ahead and access the camera here
-				},
-				function() {
-					// Inform the user that he has to give permission for access.
-					// Ideally, ask for permission and try again.
-					navigator.notification.alert(
-						'Access to the camera is switched off, please enable it in app settings to continue.',	// message
-						onExitConfirm,								// callback
-						'Whoops',									// title
-						'OK'										// buttonName
-					);
-					function onExitConfirm() {}
-				}
-			);
+			setTimeout(function(){
+				window.plugins.cameraAccess.checkAccess(
+					function() {
+						// Go ahead and access the camera here
+					},
+					function() {
+						// Inform the user that he has to give permission for access.
+						// Ideally, ask for permission and try again.
+						navigator.notification.alert(
+							'Access to the camera is switched off, please enable it in app settings to continue.',	// message
+							onExitConfirm,								// callback
+							'Whoops',									// title
+							'OK'										// buttonName
+						);
+						function onExitConfirm() {}
+					}
+				);
+			}, 900);
+
 		}
 
 		$(window).load(function() {		
