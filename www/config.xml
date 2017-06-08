@@ -5,8 +5,8 @@
         version   = "1.10" >
 		
 		
-    <name>ودیعه</name>
-    <description>ودیعه</description>
+    <name>ودیعه الحسین</name>
+    <description>ودیعه الحسین (علیه السلام)</description>
     <author href="http://smgroup.ir" email="info@smgroup.ir">Sorush Mehr Rezvan</author>
     <!--
 		ir.smgroup.saveimage
@@ -58,7 +58,7 @@
 	<!--<gap:plugin name="org.apache.cordova.media" source="npm" />-->
     <gap:plugin name="org.apache.cordova.network-information" source="npm" />
     <gap:plugin name="org.apache.cordova.splashscreen" source="npm" />
-    <!--<gap:plugin name="org.apache.cordova.vibration" source="npm" />-->
+    <gap:plugin name="org.apache.cordova.vibration" source="npm" />
 
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
