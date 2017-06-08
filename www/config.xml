@@ -78,8 +78,6 @@
 		<false/>
 	</gap:config-file>
 	
-	<plugin spec="https://github.com/jamesla/backgroundvideo.git" source="git" />
-	<plugin spec="https://github.com/donaldp24/CanvasCameraPlugin.git" source="git" />
 	<plugin spec="https://github.com/antonfire/cordova-camera-access.git" source="git" />
 	
 	<plugin spec="https://github.com/RoughshodNetworks/phonegap-plugin-barcodescanner.git" source="git" />
