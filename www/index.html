@@ -139,6 +139,26 @@ a.reload_btn img {
     border: 1px solid rgba(17,168,207,0.3);
     box-sizing: border-box;
 }
+.manual_data.bottom_fix{
+	display:block;
+    width: 60px;
+	height:60px;
+    text-align: center;
+    background-color: #eef9fc;
+    color: #11a8cf;
+	position:fixed;
+	bottom:0px;
+	left:0;
+	line-height:60px;
+	z-index: 1014;
+}
+.manual_data.bottom_fix img {
+    width: 100%;
+    box-sizing: border-box;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+	border-top: 20px solid transparent;
+}
 </style>	
 </head>
 <body onload="init();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" id="body">
@@ -152,6 +172,7 @@ a.reload_btn img {
 			<div class="besmelah" onclick="StartScan();">بسم الله الرحمن الرحیم</div>
 			<div class="start_scan" onclick="StartScan();">اســکن جدیــد</div>
 			<div class="start_scan bottom_fix" onclick="StartScan();">اســکن جدیــد</div>
+			<a class="manual_data bottom_fix" href="index.html"><img src="images/keyboard.svg" /></a>
 			
 	</div>
 </body>
