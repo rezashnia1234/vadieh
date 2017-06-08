@@ -78,9 +78,14 @@
 		<false/>
 	</gap:config-file>
 	
-	<plugin spec="https://github.com/antonfire/cordova-camera-access.git" source="git" />
+	<!-- <plugin spec="https://github.com/antonfire/cordova-camera-access.git" source="git" /> -->
 	
-	<plugin spec="https://github.com/RoughshodNetworks/phonegap-plugin-barcodescanner.git" source="git" />
+	<!-- <plugin spec="https://github.com/RoughshodNetworks/phonegap-plugin-barcodescanner.git" source="git" /> -->
+	<plugin spec="https://github.com/phonegap/phonegap-plugin-barcodescanner.git" source="git" />
+	<gap:config-file platform="ios" parent="NSCameraUsageDescription" overwrite="true">
+	   <string>Access to the camera is switched off, please enable it in app settings to continue.</string>
+	</gap:config-file>
+
 
     <!-- Define app icon      -->
     <icon src="images/splash/icon.png" />
