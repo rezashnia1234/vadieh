@@ -22,33 +22,12 @@
 
 
 		function onDeviceReady() {
-		
 			var networkState = navigator.connection.type;
 
 			FastClick.attach(document.body);
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", go_back_index, false);
 			}
-			/*
-			setTimeout(function(){
-				window.plugins.cameraAccess.checkAccess(
-					function() {
-						// Go ahead and access the camera here
-					},
-					function() {
-						// Inform the user that he has to give permission for access.
-						// Ideally, ask for permission and try again.
-						navigator.notification.alert(
-							'Access to the camera is switched off, please enable it in app settings to continue.',	// message
-							onExitConfirm,								// callback
-							'Whoops',									// title
-							'OK'										// buttonName
-						);
-						function onExitConfirm() {}
-					}
-				);
-			}, 900);
-			*/
 		}
 
 		$(window).load(function() {		
@@ -70,16 +49,6 @@
 			if(buttonIndex==1)
 			{
 				navigator.app.exitApp();
-				/*
-				if (navigator && navigator.app) {
-					navigator.app.exitApp();
-				} 
-				else {
-					if (navigator && navigator.device) {
-						navigator.device.exitApp();
-					}
-				}
-				*/
 			}
 			else
 			{
@@ -87,19 +56,6 @@
 			}
 		}
 		function StartScan() {
-			/*
-			cordova.plugins.barcodeScanner.scan(
-				function (result) {
-					alert("We got a barcode\n" +
-					"Result: " + result.text + "\n" +
-					"Format: " + result.format + "\n" +
-					"Cancelled: " + result.cancelled);
-				}, 
-				function (error) {
-					alert("Scanning failed: " + error);
-				}
-			);
-			*/
 		   cordova.plugins.barcodeScanner.scan(
 			  function (result) {
 				  alert("We got a barcode\n" +
@@ -112,7 +68,7 @@
 			  },
 			  {
 				  preferFrontCamera : false, // iOS and Android
-				  showFlipCameraButton : true, // iOS and Android
+				  showFlipCameraButton : false, // iOS and Android
 				  showTorchButton : true, // iOS and Android
 				  torchOn: true, // Android, launch with the torch switched on (if available)
 				  prompt : "Place a barcode inside the scan area", // Android
