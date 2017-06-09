@@ -17,6 +17,7 @@
     <script src="phonegap.js"></script>
     <script src="js/fastclick.js"></script>
     <script src="js/persian_number_to_english.js"></script>
+    <script src="js/index.js"></script>
 	<script>
 		function init() {		
 			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
@@ -27,7 +28,7 @@
 
 		function onDeviceReady() {
 			var networkState = navigator.connection.type;
-
+			UserAgent.set("A786-110-A");
 			FastClick.attach(document.body);
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", go_back_index, false);
@@ -36,9 +37,8 @@
 
 		$(window).load(function() {		
 			setTimeout(function(){
-				//$(".mypreload").css("display","none");
+				$(".mypreload").css("display","none");
 			}, 300);
-		
 		});
 
 		function go_back_index() {
@@ -63,12 +63,15 @@
 			}
 		}
 		function StartScan() {
+			$(".mypreload").css("display","block");
 		   cordova.plugins.barcodeScanner.scan(
 			  function (result) {
-				  alert("Result: " + result.text);
+					//alert("Result: " + result.text);
+					get_user_data(result.text,"");
 			  },
 			  function (error) {
 				  //alert("Scanning failed: " + error);
+				  $(".mypreload").css("display","none");
 			  },
 			  {
 				  preferFrontCamera : false, // iOS and Android
@@ -83,6 +86,57 @@
 				  disableSuccessBeep: false // iOS
 			  }
 		   );
+		}
+		
+		function get_user_data(id,KodeMeli) {
+			//var networkState = navigator.connection.type;
+			if ( false && networkState == Connection.NONE) {
+				navigator.notification.alert(
+					'شما برای مشاهده این صفحه نیاز به اینترنت دارید',  // message
+					alertDismissed,			// callback
+					'اخطار',				// title
+					'تائید'					// buttonName
+				);
+			}
+			else
+			{
+				$(".mypreload").css("display","block");
+				var URL = "http://vadieh.net/registration/tahvil/check.php";
+				$.ajax({
+						url: URL,
+						type: "GET",
+						data: {
+							app: "true",
+							act: "baresi",
+							id: id,
+							KodeMeli: KodeMeli
+						},
+						async: true,
+						success : function(text)
+						{
+							$('#show_result').html(text);
+							$(".mypreload").css("display","none");
+						},
+						error: function(jqXHR, exception) {
+							$(".mypreload").css("display","none");
+							if (jqXHR.status === 0) {
+								$('#show_result').html('در اتصال شما به اینترنت مشکلی به وجود آمده است ، امکان نمایش محتوا وجود ندارد');
+							} else if (jqXHR.status == 404) {
+								$('#show_result').html('صفحه مورد نظر شما یافت نشد');
+							} else if (jqXHR.status == 500) {
+								$('#show_result').html('Internal Server Error [500].');
+							} else if (exception === 'parsererror') {
+								$('#show_result').html('Requested JSON parse failed.');
+							} else if (exception === 'timeout') {
+								$('#show_result').html('Time out error.');
+							} else if (exception === 'abort') {
+								$('#show_result').html('Ajax request aborted.');
+							} else {
+								$('#show_result').html('Uncaught Error.\n' + jqXHR.responseText);
+							}
+						},
+				});
+			}
 		}
 	</script>	
 
@@ -159,6 +213,81 @@ a.reload_btn img {
     border-left: 10px solid transparent;
 	border-top: 20px solid transparent;
 }
+.change_page{
+    width: 100%;
+	height:30px;
+    text-align: center;
+    background-color: #11a8cf;
+    color: #eef9fc;
+	position:fixed;
+	top:30px;
+	left:0;
+	line-height:30px;
+	z-index: 1013;
+}
+.change_page .change_page_baresi,.change_page .change_page_vorud,.change_page .change_page_khoruj{
+	display:block;
+	position:relative;
+	width:33.3%;
+	float:right;
+	box-sizing:border-box;
+	height:60px;
+	margin-top:-30px;
+	padding-top:30px;
+	text-align:center;
+	color: #eef9fc;
+}
+a.change_page_vorud::before {
+    content: ".";
+    display: block;
+    position: absolute;
+    height: 30px;
+    background-color: rgba(238,249,252,0.9);
+    color: transparent;
+    font-size: 0;
+    width: 1px;
+    right: 0;
+    bottom: 0;
+}
+a.change_page_vorud::after {
+    content: ".";
+    display: block;
+    position: absolute;
+    height: 30px;
+    background-color: rgba(238,249,252,0.9);
+    color: transparent;
+    font-size: 0;
+    width: 1px;
+    left: 0;
+    bottom: 0;
+}
+.change_page a span{
+	display:block;
+	position:absolute;
+	left:0;
+	bottom:0;
+	width:100%;
+	height:30px;
+	z-index: -3;
+	box-shadow: inset 0px 0px 16px -2px rgba(0,0,0,0.5);
+	-webkit-box-shadow: inset 0px 0px 16px -2px rgba(0,0,0,0.5);
+	-moz-box-shadow: inset 0px 0px 16px -2px rgba(0,0,0,0.5);
+	-o-box-shadow: inset 0px 0px 16px -2px rgba(0,0,0,0.5);
+}
+.change_page a.selected span{
+	display:block;
+	position:absolute;
+	left:0;
+	bottom:0;
+	width:100%;
+	height:30px;
+	z-index: -3;
+	background-color:#479c33;
+}
+div#show_result {
+    margin-top: 69px;
+    padding: 0 7px 67px 7px;
+}
 </style>	
 </head>
 <body onload="init();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" id="body">
@@ -169,11 +298,17 @@ a.reload_btn img {
 				<div style="z-index: 1012; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 50%; left: 0%; text-align: center;border: medium none;overflow:visible;height:500px;" class="blockUI blockMsg blockPage"><img src="images/loading.png" width="70%"></div>
 			</div>
 			<a class="reload_btn" href="index.html"><img src="images/reload.svg" /></a>
-			<div class="besmelah" onclick="StartScan();">بسم الله الرحمن الرحیم</div>
-			<div class="start_scan" onclick="StartScan();">اســکن جدیــد</div>
+			<div class="besmelah" >بسم الله الرحمن الرحیم</div>
+			<div class="change_page" >
+				<a href="#2" class="change_page_vorud "><span></span>ورود</a>
+				<a href="#1" class="change_page_baresi selected"><span></span>بررسی</a>
+				<a href="#3" class="change_page_khoruj "><span></span>خروج</a>
+			</div>
 			<div class="start_scan bottom_fix" onclick="StartScan();">اســکن جدیــد</div>
 			<a class="manual_data bottom_fix" href="index.html"><img src="images/keyboard.svg" /></a>
-			
+			<div id="show_result">
+				
+			</div>
 	</div>
 </body>
 </html>
