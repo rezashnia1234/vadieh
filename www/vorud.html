@@ -31,7 +31,7 @@
 
 		function onDeviceReady() {
 			var networkState = navigator.connection.type;
-			UserAgent.set("A786-110-A");
+			//UserAgent.set("A786-110-A");
 			FastClick.attach(document.body);
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", go_back_index, false);
@@ -232,7 +232,7 @@ a.amar_btn img {
     background-color: #eef9fc;
     color: #11a8cf;
 	position:fixed;
-	bottom:0px;
+	bottom:-1px;
 	left:0;
 	line-height:60px;
 	z-index: 1014;
@@ -242,7 +242,7 @@ a.amar_btn img {
     box-sizing: border-box;
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
-	border-top: 20px solid transparent;
+	border-top: 0px solid transparent;
 }
 .change_page{
     width: 100%;
