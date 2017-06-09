@@ -9,6 +9,9 @@
     <title>بسم الله الرحمن الرحیم</title>
 
     <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="css/core.css">
+    <link rel="stylesheet" type="text/css" href="css/colors.css">
     <link rel="stylesheet" type="text/css" href="css/fontiran.css">
     <link rel="stylesheet" type="text/css" href="css/custom.css">
 
@@ -102,6 +105,7 @@
 			{
 				$(".mypreload").css("display","block");
 				var URL = "http://vadieh.net/registration/tahvil/check.php";
+				var URL_image = "http://vadieh.net/registration/";
 				$.ajax({
 						url: URL,
 						type: "GET",
@@ -114,6 +118,11 @@
 						async: true,
 						success : function(text)
 						{
+							text = text.replace('<img src="../','<img src="' + URL_image);
+							text = text.replace('<img src="../','<img src="' + URL_image);
+							$('html, body').animate({
+								scrollTop: 0
+							}, 0);
 							$('#show_result').html(text);
 							$(".mypreload").css("display","none");
 						},
