@@ -103,6 +103,10 @@
 			}
 			else
 			{
+				navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+				if (navigator.vibrate) {
+					navigator.vibrate(100);
+				}
 				$(".mypreload").css("display","block");
 				var URL = "http://vadieh.net/registration/mobile-app/check.php";
 				var URL_image = "http://vadieh.net/registration/";
