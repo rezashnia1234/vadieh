@@ -92,13 +92,6 @@
 		}
 		
 		function keyboard() {
-			function onPrompt(results) {
-				//alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
-				if(buttonIndex==1 && results.input1 != "")
-				{
-					get_user_data("",results.input1);
-				}
-			}
 			navigator.notification.prompt(
 				'لطفا کدملی را وارد نمایید',	// message
 				onPrompt,						// callback to invoke
@@ -106,6 +99,13 @@
 				['تائید','لغو'],				// buttonLabels
 				''								// defaultText
 			);
+			function onPrompt(results) {
+				//alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
+				if(results.buttonIndex==1 && results.input1 != "")
+				{
+					get_user_data("",results.input1);
+				}
+			}
 		}
 
 		function get_user_data(id,KodeMeli) {
