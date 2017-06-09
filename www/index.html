@@ -91,6 +91,23 @@
 		   );
 		}
 		
+		function keyboard() {
+			navigator.notification.prompt(
+				'لطفا کدملی را وارد نمایید',	// message
+				onPrompt,						// callback to invoke
+				'ثبت دستی اطلاعات',				// title
+				['تائید','لغو'],				// buttonLabels
+				''								// defaultText
+			);
+			function onPrompt(results) {
+				//alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
+				if(buttonIndex==1 && results.input1 != "")
+				{
+					get_user_data("",results.input1);
+				}
+			}
+		}
+
 		function get_user_data(id,KodeMeli) {
 			//var networkState = navigator.connection.type;
 			if ( false && networkState == Connection.NONE) {
@@ -337,7 +354,7 @@ div#show_result {
 				<a href="khoruj.html" class="change_page_khoruj "><span></span>خروج</a>
 			</div>
 			<div class="start_scan bottom_fix" onclick="StartScan();">اســکن جدیــد</div>
-			<a class="manual_data bottom_fix" href="index.html"><img src="images/keyboard.svg" /></a>
+			<a class="manual_data bottom_fix" href="#" onclick="keyboard();" ><img src="images/keyboard.svg" /></a>
 			<div id="show_result">
 				<div class="panel bg-info">
 					<div class="panel-heading">
