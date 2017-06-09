@@ -100,11 +100,8 @@
 				''								// defaultText
 			);
 			function onPrompt(results) {
-				alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
-				alert("You selected button number " + results.buttonIndex + " and entered " + results.input2);
-				alert("You selected button number " + results.buttonIndex + " and entered " + results.input0);
-				alert("You selected button number " + results.buttonIndex + " and entered " + results.input);
-				if(buttonIndex==1 && results.input1 != "")
+				//alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
+				if(buttonIndex==1)
 				{
 					get_user_data("",results.input1);
 				}
