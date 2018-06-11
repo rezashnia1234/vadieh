@@ -29,10 +29,23 @@
 
 
 
+		function set_internet() {
+			window.localStorage.setItem('URL',"http://vadieh.net/registration/mobile-app/check.php");
+			window.localStorage.setItem('URL_image',"http://vadieh.net/registration/");
+
+			$("input[name=URL]").val(window.localStorage.getItem('URL'));
+			$("input[name=URL_image]").val(window.localStorage.getItem('URL_image'));
+		}
+		function set_local() {
+			window.localStorage.setItem('URL',"http://192.168.0.253/registration/mobile-app/check.php");
+			window.localStorage.setItem('URL_image',"http://192.168.0.253/registration/");
+			
+			$("input[name=URL]").val(window.localStorage.getItem('URL'));
+			$("input[name=URL_image]").val(window.localStorage.getItem('URL_image'));
+		}
 		function onDeviceReady() {
 			var networkState = navigator.connection.type;
 			//UserAgent.set("A786-110-A");
-			get_user_data("","");
 			FastClick.attach(document.body);
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", go_back_index, false);
@@ -49,108 +62,9 @@
 			setTimeout(function(){
 				$(".mypreload").css("display","none");
 			}, 300);
+			$("input[name=URL]").val(window.localStorage.getItem('URL'));
+			$("input[name=URL_image]").val(window.localStorage.getItem('URL_image'));
 		});
-
-		function go_back_index() {
-			StartScan();
-			/*
-			navigator.notification.confirm(
-				'آیا تمایل به خروج از برنامه را دارید؟',	// message
-				onExitConfirm,								// callback
-				'توجه',										// title
-				['بله','خیر']								// buttonName
-			);
-			*/
-		}
-		function onExitConfirm(buttonIndex) {
-			if(buttonIndex==1)
-			{
-				navigator.app.exitApp();
-			}
-			else
-			{
-				
-			}
-		}
-		function StartScan() {
-			$(".mypreload").css("display","block");
-		   cordova.plugins.barcodeScanner.scan(
-			  function (result) {
-					//alert("Result: " + result.text);
-					get_user_data(result.text,"");
-			  },
-			  function (error) {
-				  //alert("Scanning failed: " + error);
-				  $(".mypreload").css("display","none");
-			  },
-			  {
-				  preferFrontCamera : false, // iOS and Android
-				  showFlipCameraButton : false, // iOS and Android
-				  showTorchButton : true, // iOS and Android
-				  torchOn: true, // Android, launch with the torch switched on (if available)
-				  prompt : "Place a barcode inside the scan area", // Android
-				  resultDisplayDuration: 0, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
-				  //formats : "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
-				  //orientation : "landscape", // Android only (portrait|landscape), default unset so it rotates with the device
-				  disableAnimations : true, // iOS
-				  disableSuccessBeep: false // iOS
-			  }
-		   );
-		}
-		
-		function get_user_data(id,KodeMeli) {
-			//var networkState = navigator.connection.type;
-			if ( false && networkState == Connection.NONE) {
-				navigator.notification.alert(
-					'شما برای مشاهده این صفحه نیاز به اینترنت دارید',  // message
-					alertDismissed,			// callback
-					'اخطار',				// title
-					'تائید'					// buttonName
-				);
-			}
-			else
-			{
-				$(".mypreload").css("display","block");
-				var URL = window.localStorage.getItem('URL');
-				var URL_image = window.localStorage.getItem('URL_image');
-				$.ajax({
-						url: URL,
-						type: "GET",
-						data: {
-							app: "true",
-						},
-						async: true,
-						success : function(text)
-						{
-							text = text.replace('<img src="../','<img src="' + URL_image);
-							text = text.replace('<img src="../','<img src="' + URL_image);
-							$('html, body').animate({
-								scrollTop: 0
-							}, 0);
-							$('#show_result').html(text);
-							$(".mypreload").css("display","none");
-						},
-						error: function(jqXHR, exception) {
-							$(".mypreload").css("display","none");
-							if (jqXHR.status === 0) {
-								$('#show_result').html('در اتصال شما به اینترنت مشکلی به وجود آمده است ، امکان نمایش محتوا وجود ندارد');
-							} else if (jqXHR.status == 404) {
-								$('#show_result').html('صفحه مورد نظر شما یافت نشد');
-							} else if (jqXHR.status == 500) {
-								$('#show_result').html('Internal Server Error [500].');
-							} else if (exception === 'parsererror') {
-								$('#show_result').html('Requested JSON parse failed.');
-							} else if (exception === 'timeout') {
-								$('#show_result').html('Time out error.');
-							} else if (exception === 'abort') {
-								$('#show_result').html('Ajax request aborted.');
-							} else {
-								$('#show_result').html('Uncaught Error.\n' + jqXHR.responseText);
-							}
-						},
-				});
-			}
-		}
 	</script>	
 
 		
@@ -341,8 +255,18 @@ li {
 				<a href="index.html" class="change_page_baresi "><span></span>بررسی</a>
 				<a href="khoruj.html" class="change_page_khoruj "><span></span>خروج</a>
 			</div>
-			<div id="show_result">
-
+			<div id="show_result" style="direction:ltr;text-align:left;">
+				URL :
+				<input value="" placeholder="URL" name="URL" style="direction:ltr;text-align:left;width:100%;padding:0 5px;">
+				<br/>
+				Image URL :
+				<input value="" placeholder="Image URL" name="URL_image" style="direction:ltr;text-align:left;width:100%;padding:0 5px;">
+				<br/>
+				<br/>
+				<button name="" onclick="set_local();" style="width:100%;padding:0 5px;">سرور لوکال</button>
+				<br/>
+				<br/>
+				<button name="" onclick="set_internet();" style="width:100%;padding:0 5px;">سرور اینترنتی</button>
 			</div>
 	</div>
 </body>

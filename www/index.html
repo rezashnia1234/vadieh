@@ -36,6 +36,12 @@
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", go_back_index, false);
 			}
+			
+			if(window.localStorage.getItem('URL') == null)
+				window.localStorage.setItem('URL',"http://vadieh.net/registration/mobile-app/check.php");
+			if(window.localStorage.getItem('URL_image') == null)
+				window.localStorage.setItem('URL_image',"http://vadieh.net/registration/");
+
 		}
 
 		$(window).load(function() {		
@@ -114,6 +120,7 @@
 			}
 		}
 
+
 		function get_user_data(id,KodeMeli) {
 			//var networkState = navigator.connection.type;
 			if ( false && networkState == Connection.NONE) {
@@ -131,8 +138,8 @@
 					navigator.vibrate(100);
 				}
 				$(".mypreload").css("display","block");
-				var URL = "http://vadieh.net/registration/mobile-app/check.php";
-				var URL_image = "http://vadieh.net/registration/";
+				var URL = window.localStorage.getItem('URL');
+				var URL_image = window.localStorage.getItem('URL_image');
 				$.ajax({
 						url: URL,
 						type: "GET",
@@ -173,7 +180,7 @@
 						},
 				});
 			}
-		}
+		} 
 	</script>	
 
 		
@@ -261,6 +268,26 @@ a.amar_btn img {
 	z-index: 1014;
 }
 .manual_data.bottom_fix img {
+    width: 100%;
+    box-sizing: border-box;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+	border-top: 0px solid transparent;
+}
+.setting.bottom_fix{
+	display:block;
+    width: 60px;
+	height:60px;
+    text-align: center;
+    background-color: #eef9fc;
+    color: #11a8cf;
+	position:fixed;
+	bottom:-1px;
+	right:0;
+	line-height:60px;
+	z-index: 1014;
+}
+.setting.bottom_fix img {
     width: 100%;
     box-sizing: border-box;
     border-right: 10px solid transparent;
@@ -361,6 +388,7 @@ div#show_result {
 			</div>
 			<div class="start_scan bottom_fix" onclick="StartScan();">اســکن جدیــد</div>
 			<a class="manual_data bottom_fix" href="#" onclick="keyboard();" ><img src="images/keyboard.svg" /></a>
+			<a class="setting bottom_fix" href="setting.html" ><img src="images/gear.svg" /></a>
 			<div id="show_result">
 				<div class="panel bg-info">
 					<div class="panel-heading">
