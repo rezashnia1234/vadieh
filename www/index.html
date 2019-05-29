@@ -31,7 +31,32 @@
 
 		function onDeviceReady() {
 			var networkState = navigator.connection.type;
-			//UserAgent.set("A786-110-A");
+
+			//////////////////////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////////////
+			if ( device.platform == 'Android' ){
+				permissions.requestPermission(permissions.CAMERA, success, error);
+				function error() {
+					/* alert('1- Camera permission is not turned on'); */
+				}
+				function success( status ) {
+					/*
+					if( !status.hasPermission )
+					{
+						alert('2- Camera permission is not turned on');
+						alert("");
+					}
+					else
+						alert(status);
+					*/
+				}
+			}
+			//////////////////////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////////////
+
+
 			FastClick.attach(document.body);
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", go_back_index, false);
