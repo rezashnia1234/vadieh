@@ -1,7 +1,7 @@
 
 
 $( document ).ready(function() {
-	var expireDateStr = "06/16/2018";//mm/dd/yyyy
+	var expireDateStr = "06/10/2019";//mm/dd/yyyy
 	// var expireDateStr = "04/15/2017";//mm/dd/yyyy
 	var expireDateArr = expireDateStr.split("/");
 	var expireDate = new Date(expireDateArr[2], expireDateArr[0], expireDateArr[1]);
