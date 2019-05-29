@@ -38,7 +38,7 @@
 			}
 			
 			if(window.localStorage.getItem('URL') == null)
-				window.localStorage.setItem('URL',"http://vadieh.net/registration/mobile-app/check.php");
+				window.localStorage.setItem('URL',"http://vadieh.net/registration/mobile-app/");
 			if(window.localStorage.getItem('URL_image') == null)
 				window.localStorage.setItem('URL_image',"http://vadieh.net/registration/");
 
@@ -131,7 +131,7 @@
 					navigator.vibrate(100);
 				}
 				$(".mypreload").css("display","block");
-				var URL = window.localStorage.getItem('URL');
+				var URL = window.localStorage.getItem('URL') . "/in.php";
 				var URL_image = window.localStorage.getItem('URL_image');
 				$.ajax({
 						url: URL,

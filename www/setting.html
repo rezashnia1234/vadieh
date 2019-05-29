@@ -30,14 +30,14 @@
 
 
 		function set_internet() {
-			window.localStorage.setItem('URL',"http://vadieh.net/registration/mobile-app/check.php");
+			window.localStorage.setItem('URL',"http://vadieh.net/registration/mobile-app/");
 			window.localStorage.setItem('URL_image',"http://vadieh.net/registration/");
 
 			$("input[name=URL]").val(window.localStorage.getItem('URL'));
 			$("input[name=URL_image]").val(window.localStorage.getItem('URL_image'));
 		}
 		function set_local() {
-			window.localStorage.setItem('URL',"http://192.168.0.253/registration/mobile-app/check.php");
+			window.localStorage.setItem('URL',"http://192.168.0.253/registration/mobile-app/");
 			window.localStorage.setItem('URL_image',"http://192.168.0.253/registration/");
 			
 			$("input[name=URL]").val(window.localStorage.getItem('URL'));
@@ -52,7 +52,7 @@
 			}
 			
 			if(window.localStorage.getItem('URL') == null)
-				window.localStorage.setItem('URL',"http://vadieh.net/registration/mobile-app/check.php");
+				window.localStorage.setItem('URL',"http://vadieh.net/registration/mobile-app/");
 			if(window.localStorage.getItem('URL_image') == null)
 				window.localStorage.setItem('URL_image',"http://vadieh.net/registration/");
 

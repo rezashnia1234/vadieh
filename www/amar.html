@@ -39,7 +39,7 @@
 			}
 			
 			if(window.localStorage.getItem('URL') == null)
-				window.localStorage.setItem('URL',"http://vadieh.net/registration/mobile-app/check.php");
+				window.localStorage.setItem('URL',"http://vadieh.net/registration/mobile-app/");
 			if(window.localStorage.getItem('URL_image') == null)
 				window.localStorage.setItem('URL_image',"http://vadieh.net/registration/");
 
@@ -114,7 +114,7 @@
 				var URL = window.localStorage.getItem('URL');
 				var URL_image = window.localStorage.getItem('URL_image');
 				$.ajax({
-						url: URL_image + "/mobile-app/static.php",
+						url: URL + "/static.php",
 						type: "GET",
 						data: {
 							app: "true",
